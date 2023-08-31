@@ -1,9 +1,5 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
-using OpenTelemetry;
-using OpenTelemetry.Logs;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Exporter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,38 +31,10 @@ app.MapControllerRoute(
 
 app.Logger.LogInformation("Starting the app");
 
-var appResourceBuilder = ResourceBuilder.CreateDefault()
-    .AddService("dotnet-web-simple", "1.0");
+Console.WriteLine("        .....writing console output...");
 
-using var loggerFactory = LoggerFactory.Create(builder =>
-{
-    builder.AddOpenTelemetry(options =>
-    {
-        options.SetResourceBuilder(appResourceBuilder);
-        options.AddOtlpExporter(option =>
-        {
-            // option.Protocol = OtlpExportProtocol.HttpProtobuf;
-            // option.Endpoint = new Uri("https://otlp-custom-https-otel.apps.cluster-hvnhl.hvnhl.sandbox2235.opentlc.com/");
-            // option.Endpoint = new Uri("http://otel-collector.otel.svc.cluster.local:4318");
-
-            option.Protocol = OtlpExportProtocol.Grpc;
-            // option.Endpoint = new Uri("https://otel-custom-grpc-otel.apps.cluster-hvnhl.hvnhl.sandbox2235.opentlc.com"); // Expose gRPC endpoint as route doesn't work!!!
-            option.Endpoint = new Uri("http://otel-collector.otel.svc.cluster.local:4317"); // Only gRPC service endpoint works, 
-            option.ExportProcessorType = ExportProcessorType.Batch;
-            
-        });
-    });
-});
-
-var otel_collector_addr = System.Environment.GetEnvironmentVariable("MY_OTELCOL_COLLECTOR_SERVICE_HOST");
-var otel_collector_port = System.Environment.GetEnvironmentVariable("MY_OTELCOL_COLLECTOR_SERVICE_PORT");
-var otel_collector_endpoint = "http://" + otel_collector_addr + ":" + otel_collector_port;
-Console.WriteLine(otel_collector_endpoint + "        .....writing console output...");
-
-var logger = loggerFactory.CreateLogger<Program>();
-
-logger.LogDebug("This is a debug message from dotnet-web-simple", LogLevel.Debug);
-logger.LogInformation("Information messages from dotnet-web-simple are used to provide contextual information", LogLevel.Information);
-logger.LogError(new Exception("Application exception"), "dotnet-web-simple ==> These are usually accompanied by an exception");
+app.Logger.LogDebug("This is a debug message from dotnet-web-simple", LogLevel.Debug);
+app.Logger.LogInformation("Information messages from dotnet-web-simple are used to provide contextual information", LogLevel.Information);
+app.Logger.LogError(new Exception("Application exception"), "dotnet-web-simple ==> These are usually accompanied by an exception");
 
 app.Run();
