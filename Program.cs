@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+var httpClient = new HttpClient();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
