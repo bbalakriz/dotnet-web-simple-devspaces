@@ -65,6 +65,19 @@ Console.WriteLine(otel_collector_endpoint + "        .....writing console output
 
 var logger = loggerFactory.CreateLogger<Program>();
 
+app.MapGet("/", async() =>
+{
+    var response1 = httpClient.GetAsync("https://example.com");
+    var response2 = httpClient.GetAsync("https://google.com");
+
+    logger.LogInformation("********************API INVOKED************************************");
+    logger.LogInformation("API1 Response: {content}", await response1.Result.Content.ReadAsStringAsync());
+    logger.LogInformation("API2 Response: {content}", await response2.Result.Content.ReadAsStringAsync());
+    logger.LogInformation("********************API INVOKED************************************");
+
+    return Results.Ok("Success");
+});
+
 logger.LogDebug("This is a debug message from dotnet-web-simple", LogLevel.Debug);
 logger.LogInformation("Information messages from dotnet-web-simple are used to provide contextual information", LogLevel.Information);
 logger.LogError(new Exception("Application exception"), "dotnet-web-simple ==> These are usually accompanied by an exception");
