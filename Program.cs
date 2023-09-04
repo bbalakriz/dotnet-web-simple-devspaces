@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using OpenTelemetry;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Exporter;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
