@@ -69,7 +69,7 @@ Console.WriteLine(otel_collector_endpoint + "        .....writing console output
 
 var logger = loggerFactory.CreateLogger<Program>();
 
-app.MapGet("/", async() =>
+app.MapGet("/API", async() =>
 {
     var response1 = httpClient.GetAsync("https://example.com");
     var response2 = httpClient.GetAsync("https://google.com");
