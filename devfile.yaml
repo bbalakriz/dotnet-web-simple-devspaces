@@ -2,9 +2,9 @@ schemaVersion: 2.2.0
 metadata:
   name: dotnet-6.0
 attributes:
-  controller.devfile.io/devworkspace-config:
-    name: devworkspace-config
-    namespace: crw
+  # controller.devfile.io/devworkspace-config:
+  #   name: devworkspace-config
+  #   namespace: crw
   controller.devfile.io/scc: container-build
   controller.devfile.io/storage-type: per-user
 projects:
