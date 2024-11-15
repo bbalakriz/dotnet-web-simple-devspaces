@@ -9,8 +9,13 @@ attributes:
   controller.devfile.io/storage-type: per-user
 projects:
   - name: dotnet-web-simple
-    zip:
-      location: https://eclipse-che.github.io/che-devfile-registry/7.67.0/resources/v2/dotnet-web-simple.zip
+    # zip:
+    #   location: https://eclipse-che.github.io/che-devfile-registry/7.67.0/resources/v2/dotnet-web-simple.zip
+    git:
+      remotes:
+        origin: 'https://github.com/bbalakriz/dotnet-web-simple-devspaces.git'
+      checkoutFrom:
+        revision: master    
 components:
   - attributes:
       controller.devfile.io/merge-contribution: true
