@@ -10,7 +10,7 @@ attributes:
 projects:
   - name: dotnet-web-simple
     # zip:
-    #   location: https://eclipse-che.github.io/che-devfile-registry/7.67.0/resources/v2/dotnet-web-simple.zip
+    #   location: https://github.com/bbalakriz/dotnet-web-simple-devspaces/blob/master/dotnet-web-simple.zip
     git:
       remotes:
         origin: 'https://github.com/bbalakriz/dotnet-web-simple-devspaces.git'
