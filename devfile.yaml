@@ -38,7 +38,7 @@ components:
           value: Development
         - name: ASPNETCORE_URLS
           value: http://*:8080
-      image: quay.io/balki404/dotnet-udi9:6.0
+      image: quay.io/balki404/udi-rhel8:3.17-mas-20250124
       #image: quay.io/balki404/udi-rhel8:3.17-terra-ans
       memoryLimit: 2Gi
       mountSources: true
